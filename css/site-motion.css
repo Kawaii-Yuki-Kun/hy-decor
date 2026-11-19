@@ -1,0 +1,144 @@
+/* Shared: hover responses for moving things + the "Our story" door. Owned by the main page. */
+
+/* ---- hover on moving things (homepage) ---- */
+.hero-lines .base{transition:stroke 1.4s var(--ease-out)}
+.hero-lines .glint{transition:opacity 1.2s var(--ease-out),stroke-width 1.2s var(--ease-out)}
+@media (hover:hover){
+  .hero:hover .hero-lines .base{stroke:rgba(226,204,156,.2)}
+  .hero:hover .hero-lines .glint{opacity:1;stroke-width:1.6}
+}
+.hv{transition:transform 1s var(--ease-out),box-shadow 1s var(--ease-out)}
+.hv-v{transition:transform 1.6s var(--ease-out),filter 1.2s var(--ease-out)}
+@media (hover:hover){
+  .hv:hover{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(246,227,176,.55),0 36px 80px rgba(10,12,30,.5),0 0 60px rgba(212,176,106,.14)}
+  .hv:hover .hv-v{transform:scale(1.025);filter:brightness(1.08) saturate(1.05)}
+}
+.at-medal{transition:transform 1s var(--ease-out),box-shadow 1s var(--ease-out)}
+@media (hover:hover){.at-medal:hover{transform:scale(1.05);box-shadow:0 0 0 1px rgba(246,227,176,.6),0 0 80px rgba(212,176,106,.32)}}
+.vtl-m{transition:transform .9s var(--ease-out),box-shadow .9s var(--ease-out),border-color .9s var(--ease-out)}
+.vtl li::after{transition-property:clip-path,filter!important;transition-duration:1.6s,.9s!important}
+@media (hover:hover){
+  .vtl li:hover .vtl-m{transform:translateY(-4px);border-color:var(--gold-deep);box-shadow:0 12px 26px rgba(184,146,79,.25)}
+  .vtl li:hover::after{filter:brightness(1.35) drop-shadow(0 0 3px rgba(246,227,176,.7))}
+  .vtl li:hover h3{color:var(--gold-deep)}
+}
+.vtl h3{transition:color .8s var(--ease-out)}
+.hs-n{transition:transform 1s var(--ease-out),filter 1s var(--ease-out)}
+@media (hover:hover){.hs:hover .hs-n{transform:translateY(-4px);filter:drop-shadow(0 8px 14px rgba(184,146,79,.3))}}
+.her2-vis::before{transition:transform 1.2s var(--ease-out),border-color 1.2s var(--ease-out)}
+@media (hover:hover){.her2-vis:hover::before{transform:translate(calc(-50% + 30px),-30px);border-color:rgba(184,146,79,.7)}}
+
+/* ---- parallax: uses the independent `translate` property so it never fights transforms ---- */
+[data-px]{will-change:translate}
+
+/* ---- the door ---- */
+.door{position:relative;width:100%;max-width:420px;aspect-ratio:4/5;perspective:1700px;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.door-in,.door-leaf{position:absolute;inset:0;border-radius:50% 50% 28px 28px / 34% 34% 28px 28px}
+.door-in{overflow:hidden;background:radial-gradient(70% 60% at 50% 55%,#3a4380,#1E2349 70%,#151936);box-shadow:inset 0 0 0 1px rgba(226,204,156,.3)}
+.door-in::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 60% at 50% 50%,rgba(246,227,176,.55),rgba(246,227,176,0) 70%);opacity:.0;transition:opacity 1.2s var(--ease-out);pointer-events:none;z-index:1}
+.door-in video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.4s var(--ease-out) .5s,transform 2.4s var(--ease-out) .4s}
+.door-leaf{transform-style:preserve-3d;transition:transform 2.6s cubic-bezier(.45,.02,.2,1),filter 2.6s var(--ease-out);backface-visibility:hidden;will-change:transform}
+.door-leaf .her2-frame{position:absolute;inset:0;max-width:none;width:100%;height:100%;margin:0}
+.door-l{clip-path:inset(0 50% 0 0);transform-origin:0 50%}
+.door-r{clip-path:inset(0 0 0 50%);transform-origin:100% 50%}
+/* seam, panels and handles */
+.door-leaf::after{content:"";position:absolute;top:30%;bottom:10%;width:1px;background:linear-gradient(180deg,transparent,rgba(226,204,156,.6),transparent);z-index:3}
+.door-l::after{left:calc(50% - 1px)}.door-r::after{left:50%}
+.door-h{position:absolute;z-index:4;top:56%;width:5px;height:38px;border-radius:4px;background:linear-gradient(180deg,#F6E3B0,#B8924F 45%,#8E6B2E);box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.door-l .door-h{left:calc(50% - 16px)}.door-r .door-h{left:calc(50% + 11px)}
+.door-cue{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:18px;font:600 11px/1 var(--f-body);letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep);transition:color .8s var(--ease-out),letter-spacing .8s var(--ease-out)}
+.door-cue::before,.door-cue::after{content:"";width:28px;height:1px;background:currentColor;opacity:.7;transition:width .8s var(--ease-out)}
+.door-x{position:absolute;z-index:6;bottom:5%;left:50%;margin-left:-19px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(226,204,156,.55);background:rgba(21,25,54,.55);color:var(--gold-soft);display:grid;place-items:center;font:300 22px/1 var(--f-body);cursor:pointer;opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .6s var(--ease-out) 1.2s,transform .6s var(--ease-out) 1.2s,background-color .4s,color .4s;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+@media (hover:hover){
+  .door:not(.open):hover .door-l{transform:rotateY(-14deg)}
+  .door:not(.open):hover .door-r{transform:rotateY(14deg)}
+  .door:not(.open):hover .door-in::before{opacity:1}
+  .door:not(.open):hover~.door-cue,.her2-vis:hover .door-cue{color:var(--navy);letter-spacing:.3em}
+  .her2-vis:hover .door-cue::before,.her2-vis:hover .door-cue::after{width:44px}
+  .door-x:hover{background:var(--gold);color:var(--navy-ink)}
+}
+.door:focus-visible .door-in{box-shadow:inset 0 0 0 1px rgba(226,204,156,.3),0 0 0 3px rgba(184,146,79,.6)}
+.door.open{cursor:default}
+.door.open .door-l{transform:rotateY(-102deg);filter:brightness(.6)}
+.door.open .door-r{transform:rotateY(102deg);filter:brightness(.6)}
+.door.open .door-in::before{opacity:0;transition-delay:.6s}
+.door.open .door-in video{opacity:1;transform:none}
+.door.open .door-x{opacity:1;transform:none;pointer-events:auto}
+.door.open~.door-cue{opacity:.0}
+@media (prefers-reduced-motion:reduce){.door-leaf,.door-in video{transition:opacity .3s!important}.door.open .door-leaf{opacity:0;transform:none}}
+@media (max-width:1023px){.door{max-width:300px;aspect-ratio:5/5.6}}
+
+/* ---- closing section: Remotion gold-light film, screen-blended over the navy ---- */
+.final.dome-top{isolation:isolate}
+.final-fx{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;mix-blend-mode:screen;opacity:.85;pointer-events:none;transition:opacity 1.4s var(--ease-out),filter 1.4s var(--ease-out)}
+.final.dome-top>*:not(.final-fx){position:relative;z-index:1}
+@media (hover:hover){.final:hover .final-fx{opacity:1;filter:brightness(1.25) saturate(1.1)}}
+@media (prefers-reduced-motion:reduce){.final-fx{display:none}}
+
+/* ---- scroll fly-through: an arch window that you scroll into ---- */
+.fly{display:none}
+html.js .fly.ready{display:block;position:relative;height:320vh;margin-block:clamp(40px,6vw,80px) 0}
+.fly-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.fly-c{position:absolute;inset:0;width:100%;height:100%;display:block;
+  clip-path:inset(var(--it,14%) var(--ix,33%) var(--ib,10%) var(--ix,33%) round var(--rt,50%) var(--rt,50%) 24px 24px / var(--rv,28%) var(--rv,28%) 24px 24px);
+  transform:scale(var(--z,1));will-change:clip-path,transform}
+.fly-stick::after{content:"";position:absolute;inset:0;pointer-events:none;background:#F7F4EE;opacity:var(--wash,0)}
+.fly-cap{position:relative;z-index:2;display:grid;justify-items:center;gap:14px;text-align:center;opacity:var(--co,1);transform:translateY(var(--cy,0px)) scale(var(--cs,1));pointer-events:none}
+.fly-cap .eyebrow{color:var(--gold-soft);justify-content:center}
+.fly-cap .eyebrow::after{content:"";width:26px;height:1px;background:currentColor;opacity:.75}
+.fly-h{font:400 clamp(44px,7vw,104px)/1 var(--f-display);color:#FBF6EA;letter-spacing:.02em;text-shadow:0 6px 40px rgba(10,12,30,.5)}
+.fly-hint{margin-top:18px;font:600 10.5px/1 var(--f-body);letter-spacing:.32em;text-transform:uppercase;color:var(--on-navy-muted);display:grid;justify-items:center;gap:10px}
+.fly-hint::after{content:"";width:1px;height:36px;background:linear-gradient(180deg,var(--gold-soft),transparent);animation:flyhint 2.4s var(--ease-out) infinite}
+@keyframes flyhint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:899px){.fly-c{--ix:12%}}
+
+/* ---- About: the Four generations film ---- */
+.gen-film{position:relative;margin:0 auto clamp(56px,7vw,96px);max-width:1120px;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:#1E2349;
+  box-shadow:0 0 0 1px rgba(226,204,156,.3),0 30px 70px rgba(21,25,54,.25);transition:transform 1s var(--ease-out),box-shadow 1s var(--ease-out)}
+.gen-film video{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.6s var(--ease-out),filter 1.2s var(--ease-out)}
+.gen-film::after{content:"";position:absolute;inset:12px;border-radius:20px;border:1px solid rgba(246,227,176,.0);pointer-events:none;transition:border-color 1s var(--ease-out),inset 1s var(--ease-out)}
+@media (hover:hover){.gen-film:hover{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(246,227,176,.55),0 40px 80px rgba(21,25,54,.3)}
+  .gen-film:hover video{transform:scale(1.02);filter:brightness(1.08)}.gen-film:hover::after{border-color:rgba(246,227,176,.45);inset:16px}}
+@media (max-width:599px){.gen-film{aspect-ratio:4/5;border-radius:22px}}
+
+/* ---- hero: fewer lines (two slow curves only) ---- */
+.hero-lines g+g{display:none}
+.hero.dome::before{display:none}
+.hero .niche i:nth-child(2),.hero .niche i:nth-child(3){display:none}
+.hero-lines .base{stroke:rgba(226,204,156,.08)}
+
+/* ---- fly-through hands over to the atelier in place ---- */
+html.js .fly.ready{z-index:6;margin-bottom:-100vh;margin-bottom:-100svh}
+.fly-stick{opacity:var(--so,1)}
+html.js .fly.ready+#atelier{position:relative;z-index:1}
+html.js .fly.ready+#atelier>.atelier{transform:scale(var(--az,1));opacity:var(--ao,1);transform-origin:50% 30%;will-change:transform,opacity}
+
+/* ---- Custom hero: Remotion "From sketch to gilt" ---- */
+.sk-stage{background:#1E2349!important;transition:transform 1s var(--ease-out),box-shadow 1s var(--ease-out)}
+.stage .sk-v{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.6s var(--ease-out),filter 1.2s var(--ease-out)}
+@media (hover:hover){.sk-stage:hover{transform:translateY(-4px)}.sk-stage:hover .sk-v{transform:scale(1.03);filter:brightness(1.1)}}
+@media (prefers-reduced-motion:reduce){.stage .sk-v{display:none}.sk-stage{background:url(../video/sketch-gilt-poster.jpg) center/cover!important}}
+
+/* ---- closing film runs on into the footer instead of being cut at the section edge ---- */
+.final.dome-top{padding-bottom:var(--fx-run,160px)}
+.final-fx{-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 68%,rgba(0,0,0,.55) 84%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 68%,rgba(0,0,0,.55) 84%,transparent 100%)}
+.final.dome-top+.ftr{position:relative;z-index:2;margin-top:calc(var(--fx-run,160px) * -1);
+  background:linear-gradient(180deg,rgba(21,25,54,0) 0,rgba(21,25,54,.35) calc(var(--fx-run,160px) * .55),var(--navy-ink) var(--fx-run,160px),#12152f 70%,#0e1127 100%)}
+.final.dome-top+.ftr .ftr-in{padding-top:calc(var(--fx-run,160px) * .7 + clamp(24px,3vw,40px))}
+@media (max-width:599px){:root{--fx-run:110px}}
+.final.dome-top+.ftr .ftr-in::before{display:none}
+
+/* ---- section heads: the "Our collection" entrance, for every section as it scrolls in ---- */
+@media (prefers-reduced-motion:no-preference){
+  html.js .sx .sx-i{opacity:0;translate:0 14px;transition:opacity 1.1s var(--ease-out) calc(var(--i,0) * .1s + .05s),translate 1.3s var(--ease-out) calc(var(--i,0) * .1s + .05s)}
+  html.js .sx .sx-i[data-px]{translate:none;transition:opacity 1.1s var(--ease-out) calc(var(--i,0) * .1s)}
+  html.js .sx.sx-on .sx-i{opacity:1;translate:none}
+  html.js .sx .eyebrow::before{transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease-out) .25s}
+  html.js .sx .eyebrow::after{transform:scaleX(0);transform-origin:right;transition:transform 1.4s var(--ease-out) .25s}
+  html.js .sx.sx-on .eyebrow::before,html.js .sx.sx-on .eyebrow::after{transform:none}
+  .sx-g{background:linear-gradient(100deg,var(--sx-c) 0 42%,#8E6B2E 46%,#F6E3B0 50%,#B8924F 54%,var(--sx-c) 58% 100%) 100% 0/260% 100% no-repeat;
+    -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 2.8s var(--ease-out) .4s}
+  .sx.sx-on .sx-g{background-position:0 0}
+  @media (hover:hover){.sx.sx-on:hover .sx-g{animation:sx-glint 2.4s var(--ease-out)}}
+}
+@keyframes sx-glint{from{background-position:100% 0}to{background-position:0 0}}
